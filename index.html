@@ -3,297 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Pro - [Votre Nom]</title>
+    <title>Happy Azamassou - Site en maintenance</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome pour les icônes (optionnel mais pro) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts pour une typo pro -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8f9fa;
-            color: #212529;
-        }
-        .hero-section {
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: white;
-            padding: 100px 0;
-        }
-        .profile-img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .section-title {
-            font-weight: 700;
-            margin-bottom: 50px;
+            overflow-x: hidden;
             position: relative;
-            display: inline-block;
         }
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
+        
+        /* Particules animées */
+        .particles {
+            position: fixed;
+            top: 0;
             left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 2px;
-        }
-        .card-project {
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            width: 100%;
             height: 100%;
+            z-index: 1;
+            pointer-events: none;
         }
-        .card-project:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
         }
-        .skill-badge {
-            background-color: #f1f3f5;
-            color: #495057;
-            padding: 8px 20px;
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+        }
+        
+        .maintenance-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+            position: relative;
+            z-index: 10;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .profile-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            border: 4px solid white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+        
+        .profile-icon i {
+            font-size: 3.5rem;
+            color: white;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .countdown-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .countdown-item {
+            text-align: center;
+            min-width: 100px;
+        }
+        
+        .countdown-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 15px 10px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .progress-container {
+            margin: 30px 0;
+        }
+        
+        .progress {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            border-radius: 10px;
+            position: relative;
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        .maintenance-message {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            border-left: 4px solid #ffd700;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 25px;
             border-radius: 50px;
-            font-weight: 500;
-            margin: 5px;
-            display: inline-block;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
-        .skill-badge:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .btn-custom {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: #ffd700;
+        }
+        
+        .contact-item a {
             color: white;
+            text-decoration: none;
+        }
+        
+        .notification-area {
+            margin-top: 30px;
+        }
+        
+        .btn-notify {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #2c3e50;
             border: none;
-            padding: 12px 30px;
+            padding: 15px 40px;
             border-radius: 50px;
             font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
-        .btn-custom:hover {
+        
+        .btn-notify:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-            color: white;
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+            background: white;
+            border-color: #ffd700;
         }
+        
+        .toast-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            color: #2c3e50;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            border-left: 4px solid #667eea;
+        }
+        
+        .toast-notification.show {
+            transform: translateX(0);
+        }
+        
+        .toast-notification i {
+            color: #4CAF50;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            margin-top: 20px;
+        }
+        
         .social-link {
             color: white;
             font-size: 1.5rem;
             margin: 0 10px;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            display: inline-block;
         }
+        
         .social-link:hover {
-            opacity: 0.8;
-            color: white;
+            transform: translateY(-3px) scale(1.1);
+            color: #ffd700;
         }
-        footer {
-            background-color: #212529;
-            color: white;
-            padding: 30px 0;
+        
+        .maintenance-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 215, 0, 0.9);
+            color: #2c3e50;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .quote-text {
+            font-style: italic;
+            opacity: 0.9;
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+            
+            .maintenance-card {
+                padding: 30px;
+            }
+            
+            .contact-item {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="#">[Votre Nom]</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#accueil">Accueil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#projets">Projets</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#competences">Compétences</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<!-- Particules animées -->
+<div class="particles" id="particles"></div>
 
-<!-- Section Hero / Accueil -->
-<section id="accueil" class="hero-section" style="margin-top: 56px;">
-    <div class="container text-center">
-        <img src="https://via.placeholder.com/200" alt="Photo de profil" class="profile-img mb-4">
-        <h1 class="display-4 fw-bold mb-3">[Votre Nom]</h1>
-        <p class="lead mb-4">Développeur Full Stack & Architecte Web</p>
-        <p class="mb-4">Je crée des expériences numériques élégantes et performantes</p>
-        <a href="#contact" class="btn btn-light btn-lg rounded-pill px-5 py-3 fw-bold">Me contacter</a>
-        <div class="mt-4">
-            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        </div>
-    </div>
-</section>
+<!-- Toast de notification -->
+<div class="toast-notification" id="toast">
+    <i class="fas fa-check-circle"></i>
+    <span id="toastMessage">Merci ! Vous serez notifié du lancement.</span>
+</div>
 
-<!-- Section Projets -->
-<section id="projets" class="py-5">
-    <div class="container">
-        <h2 class="section-title">Mes Projets</h2>
-        <div class="row g-4">
-            <!-- Projet 1 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-project">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Projet 1">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Application Dashboard</h5>
-                        <p class="card-text text-muted">Application de gestion avec React et Node.js, intégration API REST complète.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">React</span>
-                            <span class="badge bg-success">Node.js</span>
-                            <span class="badge bg-info">MongoDB</span>
-                        </div>
-                    </div>
-                </div>
+<!-- Carte principale -->
+<div class="maintenance-card">
+    <div class="maintenance-tag">
+        <i class="fas fa-tools me-2"></i>MAINTENANCE EN COURS
+    </div>
+    
+    <!-- Icône de profil -->
+    <div class="profile-icon">
+        <i class="fas fa-laptop-code"></i>
+    </div>
+    
+    <!-- Titre -->
+    <h1 class="text-center">Happy Azamassou</h1>
+    <p class="text-center lead mb-4">Informaticien & Développeur Web</p>
+    
+    <!-- Message de maintenance -->
+    <div class="maintenance-message">
+        <i class="fas fa-cog fa-spin me-3"></i>
+        Mon site est actuellement en cours de maintenance pour vous offrir une meilleure expérience !
+    </div>
+    
+    <!-- Compte à rebours -->
+    <div class="countdown-container">
+        <div class="countdown-title">
+            <i class="far fa-clock me-2"></i>
+            Lancement dans :
+        </div>
+        <div class="countdown" id="countdown">
+            <div class="countdown-item">
+                <div class="countdown-number" id="days">00</div>
+                <div class="countdown-label">Jours</div>
             </div>
-            <!-- Projet 2 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-project">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Projet 2">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Site E-commerce</h5>
-                        <p class="card-text text-muted">Plateforme e-commerce complète avec panier, paiement Stripe et dashboard admin.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">Vue.js</span>
-                            <span class="badge bg-success">Django</span>
-                            <span class="badge bg-info">PostgreSQL</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="hours">00</div>
+                <div class="countdown-label">Heures</div>
             </div>
-            <!-- Projet 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-project">
-                    <img src="https://via.placeholder.com/400x250" class="card-img-top" alt="Projet 3">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Application Mobile</h5>
-                        <p class="card-text text-muted">App de suivi fitness avec React Native et Firebase pour le temps réel.</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="badge bg-primary">React Native</span>
-                            <span class="badge bg-success">Firebase</span>
-                            <span class="badge bg-info">Redux</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="minutes">00</div>
+                <div class="countdown-label">Minutes</div>
+            </div>
+            <div class="countdown-item">
+                <div class="countdown-number" id="seconds">00</div>
+                <div class="countdown-label">Secondes</div>
             </div>
         </div>
     </div>
-</section>
-
-<!-- Section Compétences -->
-<section id="competences" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="section-title">Mes Compétences</h2>
-        <div class="row">
-            <div class="col-lg-6">
-                <h4 class="mb-4">Développement</h4>
-                <div>
-                    <span class="skill-badge">HTML5 / CSS3</span>
-                    <span class="skill-badge">JavaScript (ES6+)</span>
-                    <span class="skill-badge">React</span>
-                    <span class="skill-badge">Vue.js</span>
-                    <span class="skill-badge">Node.js</span>
-                    <span class="skill-badge">Python</span>
-                    <span class="skill-badge">Django</span>
-                    <span class="skill-badge">PHP</span>
-                    <span class="skill-badge">SQL</span>
-                    <span class="skill-badge">MongoDB</span>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <h4 class="mb-4">Outils & Méthodologies</h4>
-                <div>
-                    <span class="skill-badge">Git / GitHub</span>
-                    <span class="skill-badge">Docker</span>
-                    <span class="skill-badge">AWS</span>
-                    <span class="skill-badge">Figma</span>
-                    <span class="skill-badge">Jira</span>
-                    <span class="skill-badge">Agile / Scrum</span>
-                    <span class="skill-badge">CI/CD</span>
-                    <span class="skill-badge">Test unitaires</span>
-                </div>
-            </div>
+    
+    <!-- Barre de progression -->
+    <div class="progress-container">
+        <div class="d-flex justify-content-between mb-2">
+            <span><i class="fas fa-code me-2"></i>Développement</span>
+            <span id="progressPercentage">75%</span>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" style="width: 75%"></div>
         </div>
     </div>
-</section>
-
-<!-- Section Contact -->
-<section id="contact" class="py-5">
-    <div class="container">
-        <h2 class="section-title">Contactez-moi</h2>
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <div class="card border-0 shadow-sm">
-                    <div class="card-body p-5">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="nom" class="form-label">Nom complet</label>
-                                    <input type="text" class="form-control form-control-lg" id="nom" placeholder="Votre nom">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control form-control-lg" id="email" placeholder="votre@email.com">
-                                </div>
-                                <div class="col-12">
-                                    <label for="sujet" class="form-label">Sujet</label>
-                                    <input type="text" class="form-control form-control-lg" id="sujet" placeholder="Sujet de votre message">
-                                </div>
-                                <div class="col-12">
-                                    <label for="message" class="form-label">Message</label>
-                                    <textarea class="form-control form-control-lg" id="message" rows="5" placeholder="Votre message..."></textarea>
-                                </div>
-                                <div class="col-12 text-center">
-                                    <button type="submit" class="btn btn-custom btn-lg px-5">Envoyer</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    
+    <!-- Citation dynamique -->
+    <div class="quote-text text-center" id="quote">
+        <i class="fas fa-quote-left me-2 opacity-50"></i>
+        Le bon site web arrive bientôt !
+    </div>
+    
+    <!-- Contacts rapides -->
+    <div class="contact-info">
+        <div class="contact-item" onclick="copyToClipboard('azamassouhappy@gmail.com')">
+            <i class="fas fa-envelope"></i>
+            <span>Email</span>
+        </div>
+        <div class="contact-item" onclick="copyToClipboard('+2290190938675')">
+            <i class="fas fa-phone-alt"></i>
+            <span>Téléphone</span>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Cotonou</span>
         </div>
     </div>
-</section>
-
-<!-- Footer -->
-<footer>
-    <div class="container text-center">
-        <p class="mb-0">&copy; 2026 [Votre Nom]. Tous droits réservés.</p>
-        <p class="mb-0">Designé avec <i class="fas fa-heart text-danger"></i> et Bootstrap</p>
+    
+    <!-- Zone de notification -->
+    <div class="notification-area text-center">
+        <p class="mb-3">Soyez notifié du lancement :</p>
+        <div class="input-group mb-3" style="max-width: 400px; margin: 0 auto;">
+            <input type="email" class="form-control bg-transparent text-white border-white" id="notifyEmail" placeholder="Votre email" style="backdrop-filter: blur(5px);">
+            <button class="btn btn-notify" type="button" onclick="showNotification()">
+                <i class="fas fa-bell me-2"></i>M'avertir
+            </button>
+        </div>
     </div>
-</footer>
+    
+    <!-- Réseaux sociaux -->
+    <div class="social-links text-center">
+        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+    </div>
+    
+    <!-- Footer -->
+    <div class="text-center mt-4" style="opacity: 0.7; font-size: 0.9rem;">
+        <i class="fas fa-copyright me-1"></i> Happy Azamassou - Tous droits réservés
+    </div>
+</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Smooth scroll pour les ancres (optionnel) -->
 <script>
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+    // Génération des particules
+    function createParticles() {
+        const particlesContainer = document.getElementById('particles');
+        const numberOfParticles = 50;
+        
+        for (let i = 0; i < numberOfParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Taille aléatoire
+            const size = Math.random() * 10 + 5;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            
+            // Position aléatoire
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            
+            // Animation aléatoire
+            particle.style.animationDelay = Math.random() * 5 + 's';
+            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // Compte à rebours (7 jours à partir de maintenant)
+    function updateCountdown() {
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 7); // Lancement dans 7 jours
+        launchDate.setHours(0, 0, 0, 0);
+        
+        function update() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+            
+            if (distance < 0) {
+                // Si la date est dépassée, ajouter 7 jours
+                launchDate.setDate(launchDate.getDate() + 7);
+                return;
+            }
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // Mise à jour de la barre de progression (simulée)
+            const totalSeconds = 7 * 24 * 60 * 60;
+            const elapsedSeconds = 7 * 24 * 60 * 60 - distance / 1000;
+            const progress = (elapsedSeconds / totalSeconds) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressPercentage').textContent = Math.round(progress) + '%';
+        }
+        
+        update();
+        setInterval(update, 1000);
+    }
+    
+    // Citations aléatoires
+    const quotes = [
+        "Un grand site web se prépare dans l'ombre...",
+        "L'élégance technique prend son temps ✨",
+        "Bientôt, quelque chose de magnifique va naître !",
+        "Le code s'écrit, la magie s'opère...",
+        "Happy prépare quelque chose de spécial pour vous",
+        "La patience est la clé du succès numérique",
+        "Maintenance = Amélioration = Excellence"
+    ];
+    
+    function updateQuote() {
+        const quoteElement = document.getElementById('quote');
+        const randomIndex = Math.floor(Math.random() * quotes.length);
+        quoteElement.innerHTML = `<i class="fas fa-quote-left me-2 opacity-50"></i>${quotes[randomIndex]}`;
+    }
+    
+    // Changer la citation toutes les 10 secondes
+    setInterval(updateQuote, 10000);
+    
+    // Fonction pour copier dans le presse-papier
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(() => {
+            showToast('📋 Copié dans le presse-papier !');
+        }).catch(err => {
+            console.error('Erreur de copie:', err);
         });
+    }
+    
+    // Fonction pour afficher le toast
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = message || 'Merci ! Vous serez notifié du lancement.';
+        toast.classList.add('show');
+        
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    }
+    
+    // Fonction pour la notification
+    function showNotification() {
+        const email = document.getElementById('notifyEmail').value;
+        if (email && email.includes('@')) {
+            showToast('✅ Merci ! Vous serez notifié du lancement.');
+            document.getElementById('notifyEmail').value = '';
+        } else {
+            showToast('❓ Veuillez entrer un email valide');
+        }
+    }
+    
+    // Animation au scroll pour les contacts
+    document.querySelectorAll('.contact-item').forEach(item => {
+        item.addEventListener('click', function() {
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+    });
+    
+    // Gestion de l'input email avec effet
+    const emailInput = document.getElementById('notifyEmail');
+    emailInput.addEventListener('focus', () => {
+        emailInput.parentElement.style.transform = 'scale(1.02)';
+    });
+    
+    emailInput.addEventListener('blur', () => {
+        emailInput.parentElement.style.transform = 'scale(1)';
+    });
+    
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', () => {
+        createParticles();
+        updateCountdown();
+        updateQuote();
     });
 </script>
 </body>
