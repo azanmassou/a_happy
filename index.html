@@ -3,82 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Azamassou - Site en maintenance</title>
+    <title>Happy Azamassou | Créatif numérique</title>
     <!-- Bootstrap 5 CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Plus moderne -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
             overflow-x: hidden;
+            min-height: 100vh;
             position: relative;
         }
-        
-        /* Particules animées */
-        .particles {
+
+        /* Canvas pour l'animation 3D */
+        #canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* Overlay gradient */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 0.7) 0%, #0a0a0a 100%);
             z-index: 1;
             pointer-events: none;
         }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 6s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) translateX(0);
-            }
-            25% {
-                transform: translateY(-20px) translateX(10px);
-            }
-            50% {
-                transform: translateY(0) translateX(20px);
-            }
-            75% {
-                transform: translateY(20px) translateX(10px);
-            }
-        }
-        
-        .maintenance-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 50px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 800px;
-            width: 90%;
-            margin: 20px;
+
+        /* Conteneur principal */
+        .main-container {
             position: relative;
             z-index: 10;
-            animation: fadeInUp 1s ease;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
-        
-        @keyframes fadeInUp {
+
+        /* Glassmorphisme carte */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 4rem;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -88,491 +84,544 @@
                 transform: translateY(0);
             }
         }
-        
-        .profile-icon {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        /* Badge créatif */
+        .creative-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 100px;
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
             border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+
+        /* Titre principal */
+        .glitch-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            position: relative;
+            color: #fff;
+        }
+
+        .glitch-title span {
+            background: linear-gradient(135deg, #fff 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Sous-titre */
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 600px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        /* Tags compétences */
+        .skill-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            cursor: default;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .skill-tag:hover {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .skill-tag i {
+            margin-right: 8px;
+            color: #a855f7;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Cartes contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 3rem 0;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-card:hover::before {
+            opacity: 1;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #a855f7;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        /* Formulaire futuriste */
+        .notify-form {
+            margin: 2rem 0;
+        }
+
+        .input-group-futuristic {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .futuristic-input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .futuristic-input:focus {
+            outline: none;
+            border-color: #a855f7;
+            background: rgba(168, 85, 247, 0.05);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .futuristic-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .futuristic-button {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .futuristic-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .futuristic-button:hover::before {
+            left: 100%;
+        }
+
+        .futuristic-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Réseaux sociaux */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            border: 4px solid white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
-            }
-        }
-        
-        .profile-icon i {
-            font-size: 3.5rem;
-            color: white;
-        }
-        
-        h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        
-        .countdown-container {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 30px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .countdown-title {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .countdown-item {
-            text-align: center;
-            min-width: 100px;
-        }
-        
-        .countdown-number {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 15px 10px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .countdown-label {
-            font-size: 1rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .progress-container {
-            margin: 30px 0;
-        }
-        
-        .progress {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        
-        .progress-bar {
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            border-radius: 10px;
-            position: relative;
-            animation: shimmer 2s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-        
-        .maintenance-message {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            font-size: 1.1rem;
-            border-left: 4px solid #ffd700;
-        }
-        
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin: 30px 0;
-        }
-        
-        .contact-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 12px 25px;
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .contact-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .contact-item i {
-            margin-right: 10px;
-            color: #ffd700;
-        }
-        
-        .contact-item a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-        }
-        
-        .notification-area {
-            margin-top: 30px;
-        }
-        
-        .btn-notify {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            color: #2c3e50;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
+            font-size: 1.2rem;
         }
-        
-        .btn-notify:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-            background: white;
-            border-color: #ffd700;
+
+        .social-link:hover {
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            border-color: transparent;
+            transform: translateY(-3px);
+            color: #fff;
         }
-        
+
+        /* Notification toast */
         .toast-notification {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: white;
-            color: #2c3e50;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            color: #fff;
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
-            border-left: 4px solid #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        
+
         .toast-notification.show {
             transform: translateX(0);
         }
-        
-        .toast-notification i {
-            color: #4CAF50;
-            margin-right: 10px;
-            font-size: 1.2rem;
+
+        /* Lignes animées */
+        .animated-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
         }
-        
-        .social-links {
-            margin-top: 20px;
-        }
-        
-        .social-link {
-            color: white;
-            font-size: 1.5rem;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .social-link:hover {
-            transform: translateY(-3px) scale(1.1);
-            color: #ffd700;
-        }
-        
-        .maintenance-tag {
+
+        .line {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(255, 215, 0, 0.9);
-            color: #2c3e50;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            animation: bounce 2s infinite;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, rgba(168, 85, 247, 0.2), transparent);
+            animation: moveLine 8s infinite linear;
         }
-        
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-5px);
-            }
+
+        @keyframes moveLine {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
-        
-        .quote-text {
-            font-style: italic;
-            opacity: 0.9;
-            margin: 20px 0;
-            font-size: 1.1rem;
-        }
-        
+
+        /* Responsive */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2rem;
+            .glass-card {
+                padding: 2rem;
             }
             
-            .countdown-number {
-                font-size: 2rem;
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
             
-            .maintenance-card {
-                padding: 30px;
+            .input-group-futuristic {
+                flex-direction: column;
             }
             
-            .contact-item {
-                width: 100%;
-                text-align: center;
+            .glitch-title {
+                font-size: 3rem;
             }
         }
     </style>
 </head>
 <body>
 
-<!-- Particules animées -->
-<div class="particles" id="particles"></div>
+<!-- Canvas pour animation 3D -->
+<canvas id="canvas"></canvas>
 
-<!-- Toast de notification -->
+<!-- Overlay -->
+<div class="overlay"></div>
+
+<!-- Lignes animées -->
+<div class="animated-lines" id="animatedLines"></div>
+
+<!-- Toast notification -->
 <div class="toast-notification" id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastMessage">Merci ! Vous serez notifié du lancement.</span>
+    <i class="fas fa-check-circle me-2" style="color: #4CAF50;"></i>
+    <span id="toastMessage">Message copié !</span>
 </div>
 
-<!-- Carte principale -->
-<div class="maintenance-card">
-    <div class="maintenance-tag">
-        <i class="fas fa-tools me-2"></i>MAINTENANCE EN COURS
-    </div>
-    
-    <!-- Icône de profil -->
-    <div class="profile-icon">
-        <i class="fas fa-laptop-code"></i>
-    </div>
-    
-    <!-- Titre -->
-    <h1 class="text-center">Happy Azamassou</h1>
-    <p class="text-center lead mb-4">Informaticien & Développeur Web</p>
-    
-    <!-- Message de maintenance -->
-    <div class="maintenance-message">
-        <i class="fas fa-cog fa-spin me-3"></i>
-        Mon site est actuellement en cours de maintenance pour vous offrir une meilleure expérience !
-    </div>
-    
-    <!-- Compte à rebours -->
-    <div class="countdown-container">
-        <div class="countdown-title">
-            <i class="far fa-clock me-2"></i>
-            Lancement dans :
+<!-- Contenu principal -->
+<div class="main-container">
+    <div class="glass-card text-center">
+        
+        <!-- Badge créatif -->
+        <div class="creative-badge">
+            <span class="pulse-dot"></span>
+            <span>EN CRÉATION • NOUVEAU SITE</span>
+            <i class="fas fa-arrow-right ms-2" style="color: #a855f7;"></i>
         </div>
-        <div class="countdown" id="countdown">
-            <div class="countdown-item">
-                <div class="countdown-number" id="days">00</div>
-                <div class="countdown-label">Jours</div>
+
+        <!-- Titre principal -->
+        <h1 class="glitch-title">
+            Happy <span>Azamassou</span>
+        </h1>
+
+        <!-- Sous-titre -->
+        <p class="subtitle mx-auto">
+            Créateur d'expériences numériques. Je façonne le web de demain avec passion et innovation.
+        </p>
+
+        <!-- Nuage de compétences -->
+        <div class="skill-cloud">
+            <span class="skill-tag"><i class="fas fa-code"></i> Développement</span>
+            <span class="skill-tag"><i class="fas fa-paint-brush"></i> Design</span>
+            <span class="skill-tag"><i class="fas fa-mobile-alt"></i> Mobile</span>
+            <span class="skill-tag"><i class="fas fa-cloud"></i> Cloud</span>
+            <span class="skill-tag"><i class="fas fa-brain"></i> IA</span>
+            <span class="skill-tag"><i class="fas fa-lock"></i> Sécurité</span>
+            <span class="skill-tag"><i class="fas fa-rocket"></i> Performance</span>
+        </div>
+
+        <!-- Grille de contact -->
+        <div class="contact-grid">
+            <div class="contact-card" onclick="copyToClipboard('azamassouhappy@gmail.com')">
+                <div class="contact-icon">
+                    <i class="far fa-envelope"></i>
+                </div>
+                <div class="contact-label">EMAIL</div>
+                <div class="contact-value">azamassouhappy@gmail.com</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="hours">00</div>
-                <div class="countdown-label">Heures</div>
+
+            <div class="contact-card" onclick="copyToClipboard('+2290190938675')">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <div class="contact-label">TÉLÉPHONE</div>
+                <div class="contact-value">+229 01 90 93 86 75</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="minutes">00</div>
-                <div class="countdown-label">Minutes</div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-label">LOCALISATION</div>
+                <div class="contact-value">Cotonou, Bénin</div>
             </div>
-            <div class="countdown-item">
-                <div class="countdown-number" id="seconds">00</div>
-                <div class="countdown-label">Secondes</div>
+
+            <div class="contact-card" onclick="openWebsite()">
+                <div class="contact-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="contact-label">SITE WEB</div>
+                <div class="contact-value">www.azan's.com</div>
             </div>
         </div>
-    </div>
-    
-    <!-- Barre de progression -->
-    <div class="progress-container">
-        <div class="d-flex justify-content-between mb-2">
-            <span><i class="fas fa-code me-2"></i>Développement</span>
-            <span id="progressPercentage">75%</span>
+
+        <!-- Formulaire de notification -->
+        <div class="notify-form">
+            <p style="color: rgba(255, 255, 255, 0.6); margin-bottom: 1rem;">
+                <i class="far fa-star me-2" style="color: #a855f7;"></i>
+                Laissez-moi vous surprendre
+            </p>
+            <div class="input-group-futuristic">
+                <input type="email" class="futuristic-input" id="emailInput" placeholder="Votre adresse email">
+                <button class="futuristic-button" onclick="notifyMe()">
+                    <span>Prévenir</span>
+                    <i class="fas fa-paper-plane ms-2"></i>
+                </button>
+            </div>
         </div>
-        <div class="progress">
-            <div class="progress-bar" id="progressBar" style="width: 75%"></div>
+
+        <!-- Réseaux sociaux -->
+        <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
         </div>
-    </div>
-    
-    <!-- Citation dynamique -->
-    <div class="quote-text text-center" id="quote">
-        <i class="fas fa-quote-left me-2 opacity-50"></i>
-        Le bon site web arrive bientôt !
-    </div>
-    
-    <!-- Contacts rapides -->
-    <div class="contact-info">
-        <div class="contact-item" onclick="copyToClipboard('azamassouhappy@gmail.com')">
-            <i class="fas fa-envelope"></i>
-            <span>Email</span>
+
+        <!-- Copyright -->
+        <div style="margin-top: 2rem; color: rgba(255, 255, 255, 0.3); font-size: 0.8rem;">
+            © 2026 Happy Azamassou — Créativité sans limite
         </div>
-        <div class="contact-item" onclick="copyToClipboard('+2290190938675')">
-            <i class="fas fa-phone-alt"></i>
-            <span>Téléphone</span>
-        </div>
-        <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>Cotonou</span>
-        </div>
-    </div>
-    
-    <!-- Zone de notification -->
-    <div class="notification-area text-center">
-        <p class="mb-3">Soyez notifié du lancement :</p>
-        <div class="input-group mb-3" style="max-width: 400px; margin: 0 auto;">
-            <input type="email" class="form-control bg-transparent text-white border-white" id="notifyEmail" placeholder="Votre email" style="backdrop-filter: blur(5px);">
-            <button class="btn btn-notify" type="button" onclick="showNotification()">
-                <i class="fas fa-bell me-2"></i>M'avertir
-            </button>
-        </div>
-    </div>
-    
-    <!-- Réseaux sociaux -->
-    <div class="social-links text-center">
-        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-    </div>
-    
-    <!-- Footer -->
-    <div class="text-center mt-4" style="opacity: 0.7; font-size: 0.9rem;">
-        <i class="fas fa-copyright me-1"></i> Happy Azamassou - Tous droits réservés
     </div>
 </div>
 
 <script>
-    // Génération des particules
-    function createParticles() {
-        const particlesContainer = document.getElementById('particles');
-        const numberOfParticles = 50;
+    // Animation canvas 3D
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    // Particules
+    const particles = [];
+    const particleCount = 100;
+    
+    for (let i = 0; i < particleCount; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            speedX: (Math.random() - 0.5) * 0.5,
+            speedY: (Math.random() - 0.5) * 0.5,
+            color: `rgba(168, 85, 247, ${Math.random() * 0.3})`
+        });
+    }
+    
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        for (let i = 0; i < numberOfParticles; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
+        particles.forEach(p => {
+            p.x += p.speedX;
+            p.y += p.speedY;
             
-            // Taille aléatoire
-            const size = Math.random() * 10 + 5;
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
+            if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
             
-            // Position aléatoire
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.top = Math.random() * 100 + '%';
-            
-            // Animation aléatoire
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            
-            particlesContainer.appendChild(particle);
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = p.color;
+            ctx.fill();
+        });
+        
+        // Lignes entre particules proches
+        particles.forEach((p1, i) => {
+            particles.slice(i + 1).forEach(p2 => {
+                const dx = p1.x - p2.x;
+                const dy = p1.y - p2.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < 100) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(168, 85, 247, ${0.1 * (1 - distance / 100)})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(p1.x, p1.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            });
+        });
+        
+        requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Lignes animées
+    function createLines() {
+        const container = document.getElementById('animatedLines');
+        for (let i = 0; i < 5; i++) {
+            const line = document.createElement('div');
+            line.className = 'line';
+            line.style.left = (20 + i * 20) + '%';
+            line.style.animationDelay = (i * 2) + 's';
+            container.appendChild(line);
         }
     }
     
-    // Compte à rebours (7 jours à partir de maintenant)
-    function updateCountdown() {
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 7); // Lancement dans 7 jours
-        launchDate.setHours(0, 0, 0, 0);
-        
-        function update() {
-            const now = new Date().getTime();
-            const distance = launchDate - now;
-            
-            if (distance < 0) {
-                // Si la date est dépassée, ajouter 7 jours
-                launchDate.setDate(launchDate.getDate() + 7);
-                return;
-            }
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            // Mise à jour de la barre de progression (simulée)
-            const totalSeconds = 7 * 24 * 60 * 60;
-            const elapsedSeconds = 7 * 24 * 60 * 60 - distance / 1000;
-            const progress = (elapsedSeconds / totalSeconds) * 100;
-            document.getElementById('progressBar').style.width = progress + '%';
-            document.getElementById('progressPercentage').textContent = Math.round(progress) + '%';
-        }
-        
-        update();
-        setInterval(update, 1000);
-    }
+    createLines();
     
-    // Citations aléatoires
-    const quotes = [
-        "Un grand site web se prépare dans l'ombre...",
-        "L'élégance technique prend son temps ✨",
-        "Bientôt, quelque chose de magnifique va naître !",
-        "Le code s'écrit, la magie s'opère...",
-        "Happy prépare quelque chose de spécial pour vous",
-        "La patience est la clé du succès numérique",
-        "Maintenance = Amélioration = Excellence"
-    ];
-    
-    function updateQuote() {
-        const quoteElement = document.getElementById('quote');
-        const randomIndex = Math.floor(Math.random() * quotes.length);
-        quoteElement.innerHTML = `<i class="fas fa-quote-left me-2 opacity-50"></i>${quotes[randomIndex]}`;
-    }
-    
-    // Changer la citation toutes les 10 secondes
-    setInterval(updateQuote, 10000);
-    
-    // Fonction pour copier dans le presse-papier
+    // Copier dans le presse-papier
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
             showToast('📋 Copié dans le presse-papier !');
         }).catch(err => {
-            console.error('Erreur de copie:', err);
+            console.error('Erreur:', err);
         });
     }
     
-    // Fonction pour afficher le toast
+    // Ouvrir le site web
+    function openWebsite() {
+        window.open('http://www.azan\'s.com', '_blank');
+    }
+    
+    // Afficher le toast
     function showToast(message) {
         const toast = document.getElementById('toast');
         const toastMessage = document.getElementById('toastMessage');
-        toastMessage.textContent = message || 'Merci ! Vous serez notifié du lancement.';
+        toastMessage.textContent = message;
         toast.classList.add('show');
         
         setTimeout(() => {
@@ -580,43 +629,46 @@
         }, 3000);
     }
     
-    // Fonction pour la notification
-    function showNotification() {
-        const email = document.getElementById('notifyEmail').value;
+    // Notification email
+    function notifyMe() {
+        const email = document.getElementById('emailInput').value;
         if (email && email.includes('@')) {
-            showToast('✅ Merci ! Vous serez notifié du lancement.');
-            document.getElementById('notifyEmail').value = '';
+            showToast('✨ Merci ! Je vous préviendrai.');
+            document.getElementById('emailInput').value = '';
+            
+            // Animation de confirmation
+            const button = event.target.closest('button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 200);
         } else {
-            showToast('❓ Veuillez entrer un email valide');
+            showToast('❓ Email invalide');
         }
     }
     
-    // Animation au scroll pour les contacts
-    document.querySelectorAll('.contact-item').forEach(item => {
-        item.addEventListener('click', function() {
-            this.style.transform = 'scale(0.95)';
+    // Effet de hover sur les cartes
+    document.querySelectorAll('.contact-card').forEach(card => {
+        card.addEventListener('click', function() {
+            this.style.transform = 'scale(0.98)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 200);
         });
     });
     
-    // Gestion de l'input email avec effet
-    const emailInput = document.getElementById('notifyEmail');
-    emailInput.addEventListener('focus', () => {
-        emailInput.parentElement.style.transform = 'scale(1.02)';
+    // Animation de l'input
+    const input = document.getElementById('emailInput');
+    input.addEventListener('focus', () => {
+        input.parentElement.style.transform = 'scale(1.02)';
     });
     
-    emailInput.addEventListener('blur', () => {
-        emailInput.parentElement.style.transform = 'scale(1)';
-    });
-    
-    // Initialisation
-    document.addEventListener('DOMContentLoaded', () => {
-        createParticles();
-        updateCountdown();
-        updateQuote();
+    input.addEventListener('blur', () => {
+        input.parentElement.style.transform = 'scale(1)';
     });
 </script>
+
+<!-- Bootstrap JS (optionnel, juste pour le bundle) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
